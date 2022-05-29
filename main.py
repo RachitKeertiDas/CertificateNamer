@@ -15,6 +15,12 @@ people = [
 cert_file = 'Participation.jpg'
 cert_font = 'URW Chancery L'
 font_size = 40
+print_position = False
+
+with open('names.csv', newline='') as csvfile:
+    reader = csv.DictReader(csvfile)
+    people = [row for row in reader]
+
 
 def process_name(filename):
     #Replace spaces, dot and @
@@ -33,6 +39,8 @@ for person in people:
         draw.font_size = font_size
         draw.stroke_color = Color('black')
         draw.text(x=870,y=416,body=person["name"])
+        if print_position:
+            draw.text(x=230,y=236,body=person["position"])
         draw.draw(image)
         image.format = "png"
 
